@@ -1,0 +1,21 @@
+backend:
+  replicaCount: 1
+  image:
+    repository: 323336951752.dkr.ecr.ap-south-1.amazonaws.com/gitops-backend
+    pullPolicy: IfNotPresent
+    tag: "latest"
+  service:
+    type: ClusterIP
+    port: 8000
+  resources: {}
+
+frontend:
+  replicaCount: 1
+  image:
+    repository: 323336951752.dkr.ecr.ap-south-1.amazonaws.com/gitops-frontend
+    pullPolicy: IfNotPresent
+    tag: "latest"
+  service:
+    type: LoadBalancer
+    port: 80
+  resources: {}
