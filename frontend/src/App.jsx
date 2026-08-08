@@ -32,9 +32,9 @@ export default function App() {
   return (
     <div className="app-container">
       <header className="header">
-        <h1 className="title">GitOps Deployment Status</h1>
+        <h1 className="title">GitOps Deployment Status 🚀</h1>
         <p className="subtitle">
-          Real-time overview of the EKS cluster resources managed by ArgoCD.
+          Real-time overview of the EKS cluster resources managed by ArgoCD. (Live Demo)
         </p>
       </header>
 
