@@ -8,13 +8,12 @@ backend:
     type: ClusterIP
     port: 8000
   resources: {}
-
 frontend:
   replicaCount: 1
   image:
     repository: 323336951752.dkr.ecr.ap-south-1.amazonaws.com/gitops-frontend
     pullPolicy: IfNotPresent
-    tag: "latest"
+    tag: "29c5deb272f41f8e53b5d67b1d9d6b37d97bdd87"
   service:
     type: LoadBalancer
     port: 80
