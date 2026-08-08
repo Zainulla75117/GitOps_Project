@@ -4,7 +4,7 @@ A complete end-to-end GitOps workflow deploying a modern web application (React 
 
 This repository demonstrates Infrastructure as Code (IaC) and a fully automated Continuous Delivery (CD) loop using GitHub Actions and ArgoCD.
 
-## 🏗️ Architecture
+## Architecture
 
 - **Infrastructure**: AWS EKS, VPC, and ECR provisioned via **Terraform**.
 - **Backend**: **FastAPI** (Python) REST API.
@@ -14,7 +14,7 @@ This repository demonstrates Infrastructure as Code (IaC) and a fully automated 
   - Automatically commits new image tags back to the Helm chart in this repository.
 - **GitOps**: **ArgoCD** continuously monitors the Helm chart and automatically syncs the EKS cluster state to match the Git repository.
 
-## 🚀 Workflow
+## Workflow
 
 1. A developer pushes code changes to `main`.
 2. GitHub Actions runs, builds the new Docker images, and pushes them to AWS ECR.
