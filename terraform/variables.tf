@@ -37,3 +37,12 @@ variable "argocd_chart_version" {
   type    = string
   default = "7.4.3"
 }
+
+variable "github_repo" {
+  type = string
+}
+
+variable "ecr_repo_prefix" {
+  type    = string
+  default = "gitops"
+}

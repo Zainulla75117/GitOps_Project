@@ -6,3 +6,5 @@ node_min_size        = 1
 node_max_size        = 2
 argocd_namespace     = "argocd"
 argocd_chart_version = "7.4.3"
+github_repo          = "Zainulla75117/GitOps_Project"
+ecr_repo_prefix      = "gitops"

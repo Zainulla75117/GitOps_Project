@@ -49,3 +49,9 @@ module "argocd" {
 
   depends_on = [module.eks]
 }
+
+module "ecr" {
+  source          = "./modules/ecr"
+  github_repo     = var.github_repo
+  ecr_repo_prefix = var.ecr_repo_prefix
+}

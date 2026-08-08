@@ -13,3 +13,15 @@ output "kubeconfig_command" {
 output "argocd_namespace" {
   value = module.argocd.argocd_namespace
 }
+
+output "ecr_backend_url" {
+  value = module.ecr.backend_repo_url
+}
+
+output "ecr_frontend_url" {
+  value = module.ecr.frontend_repo_url
+}
+
+output "github_actions_role_arn" {
+  value = module.ecr.github_actions_role_arn
+}
