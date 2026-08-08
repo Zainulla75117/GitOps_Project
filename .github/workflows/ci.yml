@@ -8,6 +8,9 @@ on:
       - 'frontend/**'
       - '.github/workflows/ci.yml'
 
+permissions:
+  contents: write
+
 env:
   AWS_REGION: ap-south-1
 
@@ -85,3 +88,36 @@ jobs:
           docker build -t $REGISTRY/$REPO:$SHA -t $REGISTRY/$REPO:latest ./frontend
           docker push $REGISTRY/$REPO:$SHA
           docker push $REGISTRY/$REPO:latest
+
+  update-gitops:
+    needs: [changes, build-backend, build-frontend]
+    if: always() && (needs.build-backend.result == 'success' || needs.build-backend.result == 'skipped') && (needs.build-frontend.result == 'success' || needs.build-frontend.result == 'skipped') && (needs.changes.outputs.backend == 'true' || needs.changes.outputs.frontend == 'true')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update Helm values
+        run: |
+          # Install yq
+          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+          sudo chmod a+x /usr/local/bin/yq
+          
+          # Update tags based on what was built
+          if [ "${{ needs.changes.outputs.backend }}" == "true" ]; then
+            yq e '.backend.image.tag = "${{ github.sha }}"' -i helm/gitops-app/values.yaml
+          fi
+          
+          if [ "${{ needs.changes.outputs.frontend }}" == "true" ]; then
+            yq e '.frontend.image.tag = "${{ github.sha }}"' -i helm/gitops-app/values.yaml
+          fi
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add helm/gitops-app/values.yaml
+          git commit -m "chore(gitops): update image tags to ${{ github.sha }} [skip ci]" || echo "No changes to commit"
+          git push
