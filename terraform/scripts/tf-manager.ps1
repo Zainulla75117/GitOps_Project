@@ -7,6 +7,11 @@ param(
 $Region      = "ap-south-1"
 $ClusterName = "gitops-cluster"
 
+# Ensure we are running from the terraform directory (parent of this script's directory)
+$TfDir = Resolve-Path (Join-Path $PSScriptRoot "..")
+Set-Location -Path $TfDir
+Write-Info "Working directory set to: $TfDir"
+
 function Write-Info    ($msg) { Write-Host "[INFO]  $msg" -ForegroundColor Cyan }
 function Write-Ok      ($msg) { Write-Host "[OK]    $msg" -ForegroundColor Green }
 function Write-Warn    ($msg) { Write-Host "[WARN]  $msg" -ForegroundColor Yellow }
