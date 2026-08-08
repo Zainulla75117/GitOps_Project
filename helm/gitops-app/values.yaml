@@ -13,7 +13,7 @@ frontend:
   image:
     repository: 323336951752.dkr.ecr.ap-south-1.amazonaws.com/gitops-frontend
     pullPolicy: IfNotPresent
-    tag: "29c5deb272f41f8e53b5d67b1d9d6b37d97bdd87"
+    tag: "52c0b01cd1c79dd3676facfa4fa28786022434a3"
   service:
     type: LoadBalancer
     port: 80
